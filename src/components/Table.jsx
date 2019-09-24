@@ -3,36 +3,57 @@ import { Table } from 'react-bootstrap';
 import cn from 'classnames';
 
 import connect from '../connect';
-import { billingSelector } from '../selectors';
+import {
+  billingSelector,
+  billingSelectorToday,
+  billingSelectorYesterday,
+  billingSelectorDayOfWeek,
+} from '../selectors';
 import myChart from '../../lib/my-chart';
 
 const mapStateToProps = (state) => {
   const billing = billingSelector(state);
-  return { billing };
+  const amount = {
+    today: billingSelectorToday(state),
+    yesterday: billingSelectorYesterday(state),
+    dayOfWeek: billingSelectorDayOfWeek(state),
+    title: 'Выручка, руб',
+  };
+  return { billing, amount };
 };
 
 @connect(mapStateToProps)
 class Tablee extends React.Component {
   componentDidMount() {
-    myChart();
+    const { amount } = this.props;
+    const {
+      today,
+      yesterday,
+      dayOfWeek,
+      title,
+    } = amount;
+    myChart([today, yesterday, dayOfWeek], title);
+  }
+
+  handleOnClick = item => () => {
+    const {
+      today,
+      yesterday,
+      dayOfWeek,
+      title,
+    } = item;
+    myChart([today, yesterday, dayOfWeek], title);
   }
 
   render() {
-    const {
-      billing,
-    } = this.props;
-
-    const amount = billing.slice(0, 3);
-    const amountToday = amount.reduce((acc, { today }) => acc + today, 0);
-    const amountEsterday = amount.reduce((acc, { yesterday }) => acc + yesterday, 0);
-    const amountDayOfWeek = amount.reduce((acc, { dayOfWeek }) => acc + dayOfWeek, 0);
+    const { billing, amount } = this.props;
 
     const calcPercentage = (a, b) => {
       const percentage = (a - b) / a * 100;
       return Math.round(percentage);
     };
 
-    const percent = calcPercentage(amountToday, amountEsterday);
+    const percent = calcPercentage(amount.today, amount.yesterday);
     const percentClass = cn({
       'text-right': true,
       'px-4': true,
@@ -68,7 +89,7 @@ class Tablee extends React.Component {
       });
 
       return (
-        <tr key={item.id}>
+        <tr key={item.id} onClick={this.handleOnClick(item)}>
           <td>{item.title}</td>
           <td className="bg-light-green text-right px-4">{item.today}</td>
           <td className={yesterdayClass}>{item.yesterday}</td>
@@ -93,19 +114,21 @@ class Tablee extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Выручка, руб</td>
-              <td className="bg-light-green text-right px-4">{amountToday}</td>
-              <td className="text-right px-4">{amountEsterday}</td>
+            <tr onClick={this.handleOnClick(amount)}>
+              <td>{amount.title}</td>
+              <td className="bg-light-green text-right px-4">{amount.today}</td>
+              <td className="text-right px-4">{amount.today}</td>
               <td className={percentClass}>
                 {percent}
                 %
               </td>
-              <td className="text-right px-4">{amountDayOfWeek}</td>
+              <td className="text-right px-4">{amount.dayOfWeek}</td>
             </tr>
-            <th colSpan="5" className="bg-white">
-              <div id="container" />
-            </th>
+            <tr>
+              <th colSpan="5" className="bg-white">
+                <div id="container" />
+              </th>
+            </tr>
           </tbody>
           <tbody>
             {billing.map(renderRow)}

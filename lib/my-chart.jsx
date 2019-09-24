@@ -1,19 +1,12 @@
 import Highcharts from 'highcharts';
 
-const myChart = () => Highcharts.chart('container', {
+const myChart = (data, title) => Highcharts.chart('container', {
   title: {
     text: '',
   },
 
-  yAxis: {
-    title: {
-      text: '',
-    },
-  },
-  legend: {
-    layout: 'vertical',
-    align: 'right',
-    verticalAlign: 'middle',
+  xAxis: {
+    categories: ['today', 'yesterday', 'dayOfWeek'],
   },
 
   plotOptions: {
@@ -21,13 +14,13 @@ const myChart = () => Highcharts.chart('container', {
       label: {
         connectorAllowed: false,
       },
-      pointStart: 1,
+      pointStart: 0,
     },
   },
 
   series: [{
-    name: 'receipts',
-    data: [43934, 52503, 57177],
+    name: title,
+    data,
   }],
 
   responsive: {
