@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <div className="container mt-5">
+        <div className="container my-5">
           <Tablee />
         </div>
       </>

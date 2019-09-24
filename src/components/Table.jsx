@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import connect from '../connect';
 import { billingSelector } from '../selectors';
+import myChart from '../../lib/my-chart';
 
 const mapStateToProps = (state) => {
   const billing = billingSelector(state);
@@ -12,6 +13,10 @@ const mapStateToProps = (state) => {
 
 @connect(mapStateToProps)
 class Tablee extends React.Component {
+  componentDidMount() {
+    myChart();
+  }
+
   render() {
     const {
       billing,
@@ -77,32 +82,36 @@ class Tablee extends React.Component {
     };
 
     return (
-      <Table responsive bordered hover>
-        <thead>
-          <tr>
-            <th className="text-center">Показатель</th>
-            <th className="bg-light-green text-center">Текущий день</th>
-            <th colSpan="2" className="text-center">Вчера</th>
-            <th className="text-center">Этот день неделю&nbsp;назад</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Выручка, руб</td>
-            <td className="bg-light-green text-right px-4">{amountToday}</td>
-            <td className="text-right px-4">{amountEsterday}</td>
-            <td className={percentClass}>
-              {percent}
-              %
-            </td>
-            <td className="text-right px-4">{amountDayOfWeek}</td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          {billing.map(renderRow)}
-        </tbody>
-      </Table>
+      <>
+        <Table responsive bordered hover>
+          <thead>
+            <tr>
+              <th className="text-center">Показатель</th>
+              <th className="bg-light-green text-center">Текущий день</th>
+              <th colSpan="2" className="text-center">Вчера</th>
+              <th className="text-center">Этот день неделю&nbsp;назад</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Выручка, руб</td>
+              <td className="bg-light-green text-right px-4">{amountToday}</td>
+              <td className="text-right px-4">{amountEsterday}</td>
+              <td className={percentClass}>
+                {percent}
+                %
+              </td>
+              <td className="text-right px-4">{amountDayOfWeek}</td>
+            </tr>
+            <th colSpan="5" className="bg-white">
+              <div id="container" />
+            </th>
+          </tbody>
+          <tbody>
+            {billing.map(renderRow)}
+          </tbody>
+        </Table>
+      </>
     );
   }
 }
