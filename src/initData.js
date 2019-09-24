@@ -1,0 +1,81 @@
+const billing = {
+  allIds: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  byId: {
+    1: {
+      id: 1,
+      title: 'Наличные',
+      visible: true,
+      today: 290000,
+      yesterday: 300000,
+      dayOfWeek: 290000,
+    },
+    2: {
+      id: 2,
+      title: 'Безналичный расчет',
+      visible: true,
+      today: 95000,
+      yesterday: 100000,
+      dayOfWeek: 95000,
+    },
+    3: {
+      id: 3,
+      title: 'Кредитные карты',
+      visible: true,
+      today: 95521,
+      yesterday: 100521,
+      dayOfWeek: 95521,
+    },
+    4: {
+      id: 4,
+      title: 'Средний чек, руб',
+      visible: true,
+      today: 1300,
+      yesterday: 900,
+      dayOfWeek: 900,
+    },
+    5: {
+      id: 5,
+      title: 'Средний гость, руб',
+      visible: true,
+      today: 1200,
+      yesterday: 800,
+      dayOfWeek: 800,
+    },
+    6: {
+      id: 6,
+      title: 'Удаление из чека (после оплаты), руб',
+      visible: true,
+      today: 1000,
+      yesterday: 1100,
+      dayOfWeek: 900,
+    },
+    7: {
+      id: 7,
+      title: 'Удаления из счета (до оплаты), руб',
+      visible: true,
+      today: 1200,
+      yesterday: 1300,
+      dayOfWeek: 900,
+    },
+    8: {
+      id: 8,
+      title: 'Количество чеков',
+      visible: true,
+      today: 34,
+      yesterday: 36,
+      dayOfWeek: 34,
+    },
+    9: {
+      id: 9,
+      title: 'Количество гостей',
+      visible: true,
+      today: 34,
+      yesterday: 36,
+      dayOfWeek: 32,
+    },
+  },
+};
+
+export default {
+  billing,
+};
