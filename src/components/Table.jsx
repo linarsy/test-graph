@@ -64,6 +64,8 @@ class Tablee extends React.Component {
     });
 
     const renderRow = (item) => {
+      if (!item.visible) return null;
+
       const percentage = calcPercentage(item.today, item.yesterday);
       const percentageClass = cn({
         'text-right': true,

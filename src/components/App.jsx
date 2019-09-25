@@ -18,12 +18,10 @@ class App extends React.Component {
     // } = this.props;
 
     return (
-      <>
+      <div className="container my-5">
         <Header />
-        <div className="container my-5">
-          <Tablee />
-        </div>
-      </>
+        <Tablee />
+      </div>
     );
   }
 }
