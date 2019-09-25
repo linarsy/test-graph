@@ -1,6 +1,6 @@
 import Highcharts from 'highcharts';
 
-const myChart = (data, title) => Highcharts.chart('container', {
+const renderChart = (data, title) => Highcharts.chart('container', {
   title: {
     text: '',
   },
@@ -39,4 +39,4 @@ const myChart = (data, title) => Highcharts.chart('container', {
   },
 });
 
-export default myChart;
+export default renderChart;

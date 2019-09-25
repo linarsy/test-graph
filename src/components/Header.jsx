@@ -33,9 +33,8 @@ class Header extends React.Component {
     return (
       <Navbar expand="lg" className="border border-grey border-bottom-0">
         <Navbar.Brand href="#" className="font-weight-bold">Общая статистика</Navbar.Brand>
-        <Dropdown className="ml-auto">
+        <Dropdown className="ml-auto" >
           <Dropdown.Toggle id="dropdown-custom-components" variant="secondary">
-            Setting
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {billing.map(renderItem)}

@@ -1,6 +1,6 @@
 {
   "name": "linay-test-skyeng",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Тестовое задание для SkyEng",
   "engines": {
     "node": "9"
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linarsy/test-skyeng.git"
+    "url": "git+https://github.com/linarsy/test-graph.git"
   },
   "browserslist": [
     "last 2 Chrome versions",
@@ -21,9 +21,9 @@
   "author": "Ala Yakushava",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/linarsy/test-skyeng/issues"
+    "url": "https://github.com/linarsy/test-graph/issues"
   },
-  "homepage": "https://github.com/linarsy/test-skyeng#readme",
+  "homepage": "https://github.com/linarsy/test-graph#readme",
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",

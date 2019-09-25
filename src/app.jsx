@@ -4,7 +4,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import reducers from './reducers';
-import App from './components/App';
+import Header from './components/Header';
+import Spreadsheet from './components/Spreadsheet';
 
 /* eslint-disable no-underscore-dangle */
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -19,7 +20,8 @@ const store = createStore(
 export default () => {
   render(
     <Provider store={store}>
-      <App />
+      <Header />
+      <Spreadsheet />
     </Provider>,
     document.getElementById('root'),
   );

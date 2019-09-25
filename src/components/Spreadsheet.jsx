@@ -9,7 +9,7 @@ import {
   billingSelectorYesterday,
   billingSelectorDayOfWeek,
 } from '../selectors';
-import myChart from '../../lib/my-chart';
+import renderChart from '../../lib/my-chart';
 
 const mapStateToProps = (state) => {
   const billing = billingSelector(state);
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 };
 
 @connect(mapStateToProps)
-class Tablee extends React.Component {
+class Spreadsheet extends React.Component {
   componentDidMount() {
     const { amount } = this.props;
     const {
@@ -32,7 +32,7 @@ class Tablee extends React.Component {
       dayOfWeek,
       title,
     } = amount;
-    myChart([today, yesterday, dayOfWeek], title);
+    renderChart([today, yesterday, dayOfWeek], title);
   }
 
   handleOnClick = item => () => {
@@ -42,7 +42,7 @@ class Tablee extends React.Component {
       dayOfWeek,
       title,
     } = item;
-    myChart([today, yesterday, dayOfWeek], title);
+    renderChart([today, yesterday, dayOfWeek], title);
   }
 
   render() {
@@ -105,40 +105,38 @@ class Tablee extends React.Component {
     };
 
     return (
-      <>
-        <Table responsive bordered hover>
-          <thead>
-            <tr>
-              <th className="text-center">Показатель</th>
-              <th className="bg-light-green text-center">Текущий день</th>
-              <th colSpan="2" className="text-center">Вчера</th>
-              <th className="text-center">Этот день неделю&nbsp;назад</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onClick={this.handleOnClick(amount)}>
-              <td>{amount.title}</td>
-              <td className="bg-light-green text-right px-4">{amount.today}</td>
-              <td className="text-right px-4">{amount.today}</td>
-              <td className={percentClass}>
-                {percent}
-                %
-              </td>
-              <td className="text-right px-4">{amount.dayOfWeek}</td>
-            </tr>
-            <tr>
-              <th colSpan="5" className="bg-white">
-                <div id="container" />
-              </th>
-            </tr>
-          </tbody>
-          <tbody>
-            {billing.map(renderRow)}
-          </tbody>
-        </Table>
-      </>
+      <Table responsive bordered hover>
+        <thead>
+          <tr>
+            <th className="text-center">Показатель</th>
+            <th className="bg-light-green text-center">Текущий день</th>
+            <th colSpan="2" className="text-center">Вчера</th>
+            <th className="text-center">Этот день неделю&nbsp;назад</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onClick={this.handleOnClick(amount)}>
+            <td>{amount.title}</td>
+            <td className="bg-light-green text-right px-4">{amount.today}</td>
+            <td className="text-right px-4">{amount.today}</td>
+            <td className={percentClass}>
+              {percent}
+              %
+            </td>
+            <td className="text-right px-4">{amount.dayOfWeek}</td>
+          </tr>
+          <tr>
+            <th colSpan="5" className="bg-white">
+              <div id="container" />
+            </th>
+          </tr>
+        </tbody>
+        <tbody>
+          {billing.map(renderRow)}
+        </tbody>
+      </Table>
     );
   }
 }
 
-export default Tablee;
+export default Spreadsheet;
