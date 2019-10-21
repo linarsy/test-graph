@@ -4,11 +4,9 @@ const renderChart = (data, title) => Highcharts.chart('container', {
   title: {
     text: '',
   },
-
   xAxis: {
     categories: ['today', 'yesterday', 'dayOfWeek'],
   },
-
   plotOptions: {
     series: {
       label: {
@@ -17,12 +15,10 @@ const renderChart = (data, title) => Highcharts.chart('container', {
       pointStart: 0,
     },
   },
-
   series: [{
     name: title,
     data,
   }],
-
   responsive: {
     rules: [{
       condition: {

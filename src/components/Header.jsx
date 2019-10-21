@@ -12,9 +12,9 @@ const mapStateToProps = (state) => {
 @connect(mapStateToProps)
 class Header extends React.Component {
   handleClick = attributes => (e) => {
-    const { hideRow } = this.props;
+    const { toggleRow } = this.props;
     e.preventDefault();
-    hideRow({ attributes });
+    toggleRow({ attributes });
   };
 
   render() {
@@ -33,7 +33,7 @@ class Header extends React.Component {
     return (
       <Navbar expand="lg" className="border border-grey border-bottom-0">
         <Navbar.Brand href="#" className="font-weight-bold">Общая статистика</Navbar.Brand>
-        <Dropdown className="ml-auto" >
+        <Dropdown className="ml-auto">
           <Dropdown.Toggle id="dropdown-custom-components" variant="secondary">
           </Dropdown.Toggle>
           <Dropdown.Menu>

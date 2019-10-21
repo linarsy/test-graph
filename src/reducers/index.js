@@ -5,7 +5,7 @@ import * as actions from '../actions';
 import initData from '../initData';
 
 const billing = handleActions({
-  [actions.hideRow](state, { payload: { attributes } }) {
+  [actions.toggleRow](state, { payload: { attributes } }) {
     const { byId, allIds } = state;
     return {
       ...state,

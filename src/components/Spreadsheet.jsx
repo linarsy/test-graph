@@ -10,6 +10,7 @@ import {
   billingSelectorDayOfWeek,
 } from '../selectors';
 import renderChart from '../../lib/my-chart';
+import calcPercentage from '../utils/calcPercentage';
 
 const mapStateToProps = (state) => {
   const billing = billingSelector(state);
@@ -48,39 +49,34 @@ class Spreadsheet extends React.Component {
   render() {
     const { billing, amount } = this.props;
 
-    const calcPercentage = (a, b) => {
-      const percentage = (a - b) / a * 100;
-      return Math.round(percentage);
-    };
-
-    const percent = calcPercentage(amount.today, amount.yesterday);
-    const percentClass = cn({
+    const percentOfAmount = calcPercentage(amount.today, amount.yesterday);
+    const percentOfAmountClass = cn({
       'text-right': true,
       'px-4': true,
-      'bg-light-red': percent < -9,
-      'bg-light-blue': percent > 9,
-      'text-danger': percent < 0,
-      'text-success': percent > 0,
+      'bg-light-red': percentOfAmount < -9,
+      'bg-light-blue': percentOfAmount > 9,
+      'text-danger': percentOfAmount < 0,
+      'text-success': percentOfAmount > 0,
     });
 
     const renderRow = (item) => {
       if (!item.visible) return null;
 
-      const percentage = calcPercentage(item.today, item.yesterday);
-      const percentageClass = cn({
+      const percentOfBilling = calcPercentage(item.today, item.yesterday);
+      const percentOfBillingClass = cn({
         'text-right': true,
         'px-4': true,
-        'bg-light-red': percentage < -9,
-        'bg-light-blue': percentage > 9,
-        'text-danger': percentage < 0,
-        'text-success': percentage > 0,
+        'bg-light-red': percentOfBilling < -9,
+        'bg-light-blue': percentOfBilling > 9,
+        'text-danger': percentOfBilling < 0,
+        'text-success': percentOfBilling > 0,
       });
 
       const yesterdayClass = cn({
         'text-right': true,
         'px-4': true,
-        'bg-light-red': percentage < -9,
-        'bg-light-blue': percentage > 9,
+        'bg-light-red': percentOfBilling < -9,
+        'bg-light-blue': percentOfBilling > 9,
       });
 
       const dayOfWeekClass = cn({
@@ -95,8 +91,8 @@ class Spreadsheet extends React.Component {
           <td>{item.title}</td>
           <td className="bg-light-green text-right px-4">{item.today}</td>
           <td className={yesterdayClass}>{item.yesterday}</td>
-          <td className={percentageClass}>
-            {percentage}
+          <td className={percentOfBillingClass}>
+            {percentOfBilling}
             %
           </td>
           <td className={dayOfWeekClass}>{item.dayOfWeek}</td>
@@ -118,9 +114,9 @@ class Spreadsheet extends React.Component {
           <tr onClick={this.handleOnClick(amount)}>
             <td>{amount.title}</td>
             <td className="bg-light-green text-right px-4">{amount.today}</td>
-            <td className="text-right px-4">{amount.today}</td>
-            <td className={percentClass}>
-              {percent}
+            <td className="text-right px-4">{amount.yesterday}</td>
+            <td className={percentOfAmountClass}>
+              {percentOfAmount}
               %
             </td>
             <td className="text-right px-4">{amount.dayOfWeek}</td>
